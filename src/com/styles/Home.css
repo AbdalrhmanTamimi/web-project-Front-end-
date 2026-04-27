@@ -1,0 +1,72 @@
+.students {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.students h2 {
+    margin: 0 0 10px 0;
+}
+
+.book-list {
+    margin-top: 10px;
+}
+
+.book-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    background: #f7f7f7;
+}
+
+.book-card h3 {
+    margin: 0 0 6px 0;
+}
+
+.book-card p {
+    margin: 4px 0;
+}
+.buttons-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 700px;
+}
+
+.buttons-area button {
+    background-color: #e3e3e3;
+    color: #000;
+    border: 1px solid #888;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.buttons-area button:hover {
+    background-color: #d6d6d6;
+}
+
+.buttons-area input,
+.buttons-area select {
+    padding: 10px 14px;
+    width: 180px;
+    border-radius: 4px;
+    border: 1px solid #aaa;
+    font-size: 14px;
+    outline: none;
+}
+
+@media (max-width: 600px) {
+    .buttons-area {
+        justify-content: center;
+    }
+    .buttons-area input,
+    .buttons-area select {
+        width: 100%;
+    }
+}
+

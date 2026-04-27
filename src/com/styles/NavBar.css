@@ -1,0 +1,50 @@
+.nav{
+    width: 100%;
+    height: 60px;
+    background: #4a4a4a;
+}
+.JSV{
+    color: white;
+    font-weight:bolder;
+    font-size: 34px;
+    font-family: inherit;
+    position: relative;
+    left: 20px;
+    width: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.router_name {
+    cursor: pointer;
+}
+
+.router_name:hover {
+    opacity: 0.8;
+}
+
+.router_name{
+    color: white;
+    display: inline-block;
+    font-weight: 400;
+    font-family: inherit;
+    text-decoration: none;
+
+
+}
+.list{
+    display: flex;
+    gap: 15vw;
+    width: 80%;
+    position: relative;
+    top: -50%;
+    transform: translateY(+50%);
+    direction: rtl;
+    text-align: right;
+    left: 10vw;
+}
+@media (max-width: 560px) {
+    .list{
+        gap: 7vw;
+
+    }
+}

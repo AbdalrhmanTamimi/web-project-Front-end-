@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Ali Ahmed",
+    "gpa": 3.21,
+    "student_id": "S001"
+  },
+  {
+    "name": "Lina Hassan",
+    "gpa": 2.85,
+    "student_id": "S002"
+  },
+  {
+    "name": "Omar Khaled",
+    "gpa": 2.94,
+    "student_id": "S003"
+  },
+  {
+    "name": "Sara Muhammad",
+    "gpa": 3.56,
+    "student_id": "S004"
+  },
+  {
+    "name": "Yousef Samir",
+    "gpa": 2.75,
+    "student_id": "S005"
+  },
+  {
+    "name": "Dana Ibrahim",
+    "gpa": 3.90,
+    "student_id": "S006"
+  },
+  {
+    "name": "Hani Saleh",
+    "gpa": 2.30,
+    "student_id": "S007"
+  },
+  {
+    "name": "Maya Ziad",
+    "gpa": 3.42,
+    "student_id": "S008"
+  },
+  {
+    "name": "Rami Adel",
+    "gpa": 2.88,
+    "student_id": "S009"
+  },
+  {
+    "name": "Noor Tariq",
+    "gpa": 3.67,
+    "student_id": "S010"
+  }
+]

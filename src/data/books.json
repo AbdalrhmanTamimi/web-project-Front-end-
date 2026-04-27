@@ -1,0 +1,34 @@
+[
+  {
+    "id": "b1",
+    "title": "The React Guide",
+    "author": "J. Doe",
+    "genre": "Tech",
+    "price": 45.99,
+    "status": "In Stock"
+  },
+  {
+    "id": "b2",
+    "title": "CSS Mastery",
+    "author": "A. Smith",
+    "genre": "Tech",
+    "price": 22.5,
+    "status": "In Stock"
+  },
+  {
+    "id": "b3",
+    "title": "Learning JavaScript",
+    "author": "M. Lee",
+    "genre": "Tech",
+    "price": 34.0,
+    "status": "Out of Stock"
+  },
+  {
+    "id": "b4",
+    "title": "Study Skills 101",
+    "author": "K. Ali",
+    "genre": "Education",
+    "price": 18.75,
+    "status": "In Stock"
+  }
+]

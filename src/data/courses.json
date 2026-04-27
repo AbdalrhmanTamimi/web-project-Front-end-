@@ -1,0 +1,50 @@
+[
+  {
+    "id": "c1",
+    "title": "Intro to React",
+    "instructor": "Sara Ahmed",
+    "category": "Web",
+    "price": 19.99,
+    "status": "Open"
+  },
+  {
+    "id": "c2",
+    "title": "Python Basics",
+    "instructor": "Omar Khaled",
+    "category": "Programming",
+    "price": 14.5,
+    "status": "Open"
+  },
+  {
+    "id": "c3",
+    "title": "UI Design for Beginners",
+    "instructor": "Lina Saad",
+    "category": "Design",
+    "price": 9.0,
+    "status": "Closed"
+  },
+  {
+    "id": "c4",
+    "title": "Data Structures (Easy)",
+    "instructor": "Hani Saleh",
+    "category": "Computer Science",
+    "price": 24.75,
+    "status": "Open"
+  },
+  {
+    "id": "c5",
+    "title": "SQL Crash Course",
+    "instructor": "Maya Nasser",
+    "category": "Database",
+    "price": 11.25,
+    "status": "Open"
+  },
+  {
+    "id": "c6",
+    "title": "JavaScript Projects",
+    "instructor": "Yousef Hamdan",
+    "category": "Web",
+    "price": 17.8,
+    "status": "Closed"
+  }
+]
