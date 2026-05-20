@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import coursesData from "../data/courses.json";
+import { useMemo, useState,useEffect } from "react";
+
 import "./styles/Home.css";
 
 function Home() {
@@ -7,7 +7,15 @@ function Home() {
     const [category, setCategory] = useState("All");
     const [sortBy, setSortBy] = useState("title");
     const [sortDirection, setSortDirection] = useState("asc");
+const [coursesData, setCoursesData] = useState([]);
 
+  useEffect(() => {
+    fetch("https://webprojectback-end.onrender.com/api/read")
+      .then((res) => res.json())
+      .then((data) => {
+        setCoursesData(data);
+      });
+  }, []);
     const categories = useMemo(() => {
         const unique = new Set(coursesData.map((c) => c.category));
         return ["All", ...Array.from(unique).sort((a, b) => a.localeCompare(b))];
