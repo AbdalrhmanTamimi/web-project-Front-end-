@@ -2,14 +2,41 @@ import { useMemo, useState, useEffect } from "react";
 import "./styles/Home.css";
 
 function Home() {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [category, setCategory] = useState("All");
-    const [sortBy, setSortBy] = useState("courseName");
-    const [sortDirection, setSortDirection] = useState("asc");
-    const [coursesData, setCoursesData] = useState([]);
+    const [searchTerm, setSearchTerm] =
+        useState("");
+
+    const [category, setCategory] =
+        useState("All");
+
+    const [sortBy, setSortBy] =
+        useState("courseName");
+
+    const [sortDirection, setSortDirection] =
+        useState("asc");
+
+    const [coursesData, setCoursesData] =
+        useState([]);
+
+    const [userID, setUserID] =
+        useState("");
 
     useEffect(() => {
-        fetch("https://webprojectback-end.onrender.com/api/read")
+        fetch(
+            "https://webprojectback-end.onrender.com/api/isSign",
+            {
+                credentials: "include",
+            }
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.isSign) {
+                    setUserID(data.ID);
+                }
+            });
+
+        fetch(
+            "https://webprojectback-end.onrender.com/api/read"
+        )
             .then((res) => res.json())
             .then((data) => {
                 setCoursesData(data.Data);
@@ -19,40 +46,98 @@ function Home() {
             });
     }, []);
 
+    const handleDelete = async (id) => {
+        try {
+            const response = await fetch(
+                `https://webprojectback-end.onrender.com/api/delete/${id}`,
+                {
+                    method: "DELETE",
+                    credentials: "include",
+                }
+            );
+
+            const data = await response.json();
+
+            console.log(data);
+
+            if (response.ok) {
+                setCoursesData((prev) =>
+                    prev.filter(
+                        (course) =>
+                            course._id !== id
+                    )
+                );
+            } else {
+                alert(data.message);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     const categories = useMemo(() => {
-        const unique = new Set(coursesData.map((c) => c.category));
+        const unique = new Set(
+            coursesData.map(
+                (c) => c.category
+            )
+        );
 
         return [
             "All",
-            ...Array.from(unique).sort((a, b) => a.localeCompare(b)),
+            ...Array.from(unique).sort(
+                (a, b) =>
+                    a.localeCompare(b)
+            ),
         ];
     }, [coursesData]);
 
     const filteredCourses = useMemo(() => {
-        const term = searchTerm.trim().toLowerCase();
+        const term = searchTerm
+            .trim()
+            .toLowerCase();
 
-        const searched = coursesData.filter((c) => {
-            if (!term) return true;
+        const searched =
+            coursesData.filter((c) => {
+                if (!term) return true;
 
-            return (
-                c.courseName.toLowerCase().includes(term) ||
-                c.ownerName.toLowerCase().includes(term)
+                return (
+                    c.courseName
+                        .toLowerCase()
+                        .includes(term) ||
+                    c.ownerName
+                        .toLowerCase()
+                        .includes(term)
+                );
+            });
+
+        const byCategory =
+            searched.filter((c) =>
+                category === "All"
+                    ? true
+                    : c.category ===
+                      category
+            );
+
+        const sorted = [
+            ...byCategory,
+        ].sort((a, b) => {
+            if (
+                sortBy === "price"
+            ) {
+                return (
+                    a.price - b.price
+                );
+            }
+
+            return a.courseName.localeCompare(
+                b.courseName
             );
         });
 
-        const byCategory = searched.filter((c) =>
-            category === "All" ? true : c.category === category
-        );
-
-        const sorted = [...byCategory].sort((a, b) => {
-            if (sortBy === "price") {
-                return a.price - b.price;
-            }
-
-            return a.courseName.localeCompare(b.courseName);
-        });
-
-        if (sortDirection === "desc") {
+        if (
+            sortDirection ===
+            "desc"
+        ) {
             sorted.reverse();
         }
 
@@ -69,33 +154,55 @@ function Home() {
         <>
             <div className="students">
                 <h2>
-                    Course Catalog ({filteredCourses.length} results)
+                    Course Catalog (
+                    {
+                        filteredCourses.length
+                    }{" "}
+                    results)
                 </h2>
 
                 <div className="buttons-area">
                     <input
                         placeholder="Search by Course or Owner..."
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={(e) =>
+                            setSearchTerm(
+                                e.target.value
+                            )
+                        }
                     />
 
                     <select
                         value={category}
-                        onChange={(e) => setCategory(e.target.value)}
+                        onChange={(e) =>
+                            setCategory(
+                                e.target.value
+                            )
+                        }
                     >
-                        {categories.map((c) => (
-                            <option key={c} value={c}>
-                                {c}
-                            </option>
-                        ))}
+                        {categories.map(
+                            (c) => (
+                                <option
+                                    key={c}
+                                    value={c}
+                                >
+                                    {c}
+                                </option>
+                            )
+                        )}
                     </select>
 
                     <select
                         value={sortBy}
-                        onChange={(e) => setSortBy(e.target.value)}
+                        onChange={(e) =>
+                            setSortBy(
+                                e.target.value
+                            )
+                        }
                     >
                         <option value="courseName">
-                            Sort by Course Name
+                            Sort by Course
+                            Name
                         </option>
 
                         <option value="price">
@@ -105,56 +212,91 @@ function Home() {
 
                     <button
                         onClick={() =>
-                            setSortDirection((d) =>
-                                d === "asc" ? "desc" : "asc"
+                            setSortDirection(
+                                (d) =>
+                                    d ===
+                                    "asc"
+                                        ? "desc"
+                                        : "asc"
                             )
                         }
                     >
                         Direction:{" "}
-                        {sortDirection === "asc"
+                        {sortDirection ===
+                        "asc"
                             ? "⬆️ ASC"
                             : "⬇️ DESC"}
                     </button>
                 </div>
 
                 <div className="book-list">
-                    {filteredCourses.map((course) => (
-                        <div
-                            key={course._id}
-                            className="book-card"
-                        >
-                            <h3>{course.courseName}</h3>
+                    {filteredCourses.map(
+                        (course) => (
+                            <div
+                                key={
+                                    course._id
+                                }
+                                className="book-card"
+                            >
+                                {course.userID ===
+                                    userID && (
+                                    <button
+                                        className="delete-btn"
+                                        onClick={() =>
+                                            handleDelete(
+                                                course._id
+                                            )
+                                        }
+                                    >
+                                        Delete
+                                    </button>
+                                )}
 
-                            <p>
-                                By: {course.ownerName}
-                            </p>
+                                <h3>
+                                    {
+                                        course.courseName
+                                    }
+                                </h3>
 
-                            <div>
+                                <p>
+                                    By:{" "}
+                                    {
+                                        course.ownerName
+                                    }
+                                </p>
+
                                 <div>
-                                    Category:{" "}
-                                    <strong>
-                                        {course.category}
-                                    </strong>
+                                    <div>
+                                        Category:{" "}
+                                        <strong>
+                                            {
+                                                course.category
+                                            }
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        Price:{" "}
+                                        <strong>
+                                            $
+                                            {course.price.toFixed(
+                                                2
+                                            )}
+                                        </strong>
+                                    </div>
                                 </div>
 
-                                <div>
-                                    Price:{" "}
+                                <p>
+                                    Status:{" "}
                                     <strong>
-                                        ${course.price.toFixed(2)}
+                                        {course.status
+                                            ? "Available"
+                                            : "Not Available"}
                                     </strong>
-                                </div>
+                                </p>
                             </div>
-
-                            <p>
-                                Status:{" "}
-                                <strong>
-                                    {course.status
-                                        ? "Available"
-                                        : "Not Available"}
-                                </strong>
-                            </p>
-                        </div>
-                    ))}
+                        )
+                    )}
                 </div>
             </div>
         </>
