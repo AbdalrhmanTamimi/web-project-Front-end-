@@ -3,7 +3,27 @@
     margin: 20px auto;
     padding: 10px;
 }
+.delete-btn {
+    border: none;
 
+    background-color: crimson;
+
+    color: white;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    margin-bottom: 10px;
+
+    transition: 0.3s;
+}
+
+.delete-btn:hover {
+    opacity: 0.8;
+}
 .students h2 {
     margin: 0 0 10px 0;
 }
